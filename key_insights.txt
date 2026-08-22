@@ -1,0 +1,104 @@
+FALCON 9 FIRST-STAGE LANDING PREDICTION
+KEY INSIGHTS
+==============================================
+
+Project Objective
+-----------------
+The project analyzes historical Falcon 9 launch records to understand which launch and mission characteristics are associated with successful first-stage landings, and builds classification models to predict landing outcomes.
+
+1. EXPLORATORY DATA ANALYSIS
+----------------------------
+• Launch success generally improved over the historical period, indicating an overall increase in successful first-stage recovery.
+• Launch sites show different historical success patterns.
+• Orbit type is an important dimension when comparing landing outcomes.
+• Payload mass varies substantially across missions and provides useful information for understanding mission configuration.
+• Flight number and payload mass were explored against landing success to identify predictive relationships.
+
+2. SQL ANALYSIS
+---------------
+SQL was used to independently investigate the launch database through grouping, filtering, aggregation and ordering.
+
+Examples of analytical questions included:
+• Comparing successful launches across launch sites.
+• Examining success by orbit and landing class.
+• Identifying high-performing launch configurations.
+• Finding maximum-payload missions and associated booster versions.
+
+The SQL workflow complemented the Pandas-based exploratory analysis.
+
+3. GEOGRAPHIC / FOLIUM ANALYSIS
+-------------------------------
+• Four Falcon 9 launch sites were analyzed geographically.
+• Interactive Folium maps were used to display launch-site locations and mission outcomes.
+• Successful and failed launches were visualized using markers/marker clusters.
+• Geographic coordinates were inspected alongside nearby roads, railways and coastline features.
+• Great-circle distance calculations were used to quantify proximity to selected geographic features.
+
+4. PLOTLY DASH APPLICATION
+--------------------------
+The Dash application converts the analysis into an interactive interface.
+
+Main features:
+• Launch-site dropdown to select all sites or an individual site.
+• Dynamic success/failure pie chart.
+• Payload-range slider from 0 to 10,000 kg.
+• Payload-vs-Class scatter plot.
+• Booster Version Category used to visually group scatter points.
+
+This allows users to explore launch outcomes without rerunning notebook analysis.
+
+5. PREDICTIVE MODELING
+----------------------
+Target:
+• Class = 1 → successful first-stage landing
+• Class = 0 → unsuccessful first-stage landing
+
+Preprocessing:
+• Feature engineering included launch year and categorical-variable encoding.
+• Features were standardized using StandardScaler.
+• Data was split into 80% training and 20% testing data.
+• random_state = 2.
+• GridSearchCV with 10-fold cross-validation was used for hyperparameter tuning.
+
+Models evaluated:
+• Logistic Regression
+• Support Vector Machine (SVM)
+• Decision Tree
+• K-Nearest Neighbors (KNN)
+
+6. MODEL RESULTS
+----------------
+Repository results:
+
+Model                  Test Accuracy
+-------------------------------------
+Logistic Regression       83.33%
+Support Vector Machine    83.33%
+Decision Tree             72.22%
+KNN                       83.33%
+
+Additional validation findings:
+• Logistic Regression validation accuracy: 84.64%.
+• The best SVM kernel was RBF.
+• Decision Tree achieved the strongest cross-validation score at 87.50%, despite a lower held-out test accuracy.
+• KNN validation accuracy was approximately 84.82%.
+
+The models were evaluated using accuracy and confusion matrices. False positives are particularly important because they represent cases where the model predicts a successful landing but the actual outcome is failure.
+
+7. OVERALL CONCLUSIONS
+----------------------
+• Launch success contains measurable patterns that can be explored using historical mission characteristics.
+• Launch site, orbit, payload and time-related variables provide useful analytical and predictive information.
+• Payload mass alone is not sufficient to determine landing success.
+• The strong 2021-era performance and historical improvement suggest that operational maturity and reusability experience are important contextual factors.
+• Multiple classification models achieved similar held-out test accuracy, while the Decision Tree showed stronger cross-validation performance but weaker test-set performance.
+• The dataset is relatively small, so these models should be treated as an educational analytical workflow rather than production-grade prediction systems.
+• Expanding the dataset with newer launches would be the logical next step for evaluating model generalization.
+
+TECHNICAL STACK
+---------------
+Python, Pandas, NumPy, Matplotlib, Seaborn, Scikit-learn,
+Requests, BeautifulSoup, Folium, Plotly, Dash, SQL and Jupyter Notebook.
+
+Repository:
+https://github.com/thesaiprasadd/SpaceX-Falcon-9-First-Stage-Landing-Prediction/tree/main
