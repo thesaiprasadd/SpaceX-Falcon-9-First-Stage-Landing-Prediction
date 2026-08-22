@@ -1,7 +1,5 @@
 # SpaceX Falcon 9 First Stage Landing Prediction 🚀
 
-# 🚀 SpaceX Falcon 9 First-Stage Landing Prediction
-
 An end-to-end **IBM Data Science Capstone Project** that analyzes historical Falcon 9 launch data and uses machine learning to predict first-stage landing success.
 
 ### 🔍 Workflow
